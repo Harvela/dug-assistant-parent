@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=JetBrains+Mono:wght@100..800&family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", "Noto Serif", serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-label: "Space Grotesk", sans-serif;
+
+  --color-primary: #2a6861;
+  --color-primary-container: #94d1c8;
+  --color-secondary: #476460;
+  --color-secondary-container: #c9e9e4;
+  --color-tertiary: #835058;
+  --color-tertiary-container: #f6b5be;
+  --color-background: #faf9f4;
+  --color-surface: #faf9f4;
+  --color-surface-container: #efeee9;
+  --color-surface-container-low: #f5f4ef;
+  --color-surface-container-high: #e9e8e3;
+  --color-surface-container-highest: #e3e3de;
+  --color-on-surface: #1b1c19;
+  --color-on-surface-variant: #3f4947;
+  --color-outline: #707977;
+  --color-outline-variant: #bfc9c6;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+
+  --spacing-safe-top: env(safe-area-inset-top);
+  --spacing-safe-bottom: env(safe-area-inset-bottom);
+  --spacing-safe-left: env(safe-area-inset-left);
+  --spacing-safe-right: env(safe-area-inset-right);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-sans antialiased;
+  }
+}
+
+.serif-display {
+  @apply font-serif tracking-tight;
+}
+
+.mono-data {
+  @apply font-mono uppercase tracking-widest;
+}
+
+.glass-header {
+  @apply sticky top-0 z-50 backdrop-blur-xl bg-background/80;
+}
+
+.editorial-shadow {
+  box-shadow: 0 4px 20px 0 rgba(27, 28, 25, 0.04);
+}
+
+.academic-gradient {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-container) 100%);
+}

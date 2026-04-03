@@ -1,0 +1,16 @@
+{
+  "name": "EduFlow AI",
+  "short_name": "EduFlow",
+  "description": "Sophisticated educational platform for tracking student dossiers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf9f4",
+  "theme_color": "#2a6861",
+  "icons": [
+    {
+      "src": "https://lh3.googleusercontent.com/aida-public/AB6AXuB5hpVGa9TwRdeJuj2NQMRiDp_B9fOuuibQTXL4jyLFCaXawUESSNwIy9r-DaOCX2FJj21bOXGMtGghEwuBKObpYD2osSl6_QU-gcL5yAyL2bWOo5HyH8PmZ3e7E0pMRvYBtxnCql-sXm2wwWz6XWH5z3HUQaYkEn6RJqxgHJsaYZg-wZxufnDqUD-lDJnzjVE0xpJM20W_V6pui3_ik9mYBAMlJVn70H-tgCKpFeZVqqF92HxW1XIQhUyiuK0fsHRBPLLoRyd54Z2i",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
