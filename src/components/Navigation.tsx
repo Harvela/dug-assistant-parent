@@ -2,32 +2,56 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Home, Users, BarChart3, Bell, User, LayoutGrid } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { useTranslation } from 'react-i18next';
+import i18n from '../i18n';
+import { readLangFromStorage, writeLangToStorage } from '../lib/i18n/lang';
 
 export const TopBar: React.FC = () => {
+  const { t } = useTranslation();
+  const current = readLangFromStorage() ?? (i18n.language === 'en' ? 'en' : 'fr');
   return (
-    <header className="glass-header w-full flex justify-between items-center px-4 sm:px-6 py-2.5 sm:py-4 pt-[calc(0.625rem+var(--spacing-safe-top))]">
+    <header className="glass-header w-full flex justify-between items-center mt-4 px-4 sm:px-6 py-2.5 sm:py-4 pt-[calc(0.625rem+var(--spacing-safe-top))]">
       <div className="flex items-center gap-2 sm:gap-3">
-        <div className="w-7 h-7 sm:w-10 sm:h-10 rounded-lg overflow-hidden bg-primary-container flex items-center justify-center">
-          <LayoutGrid className="text-primary w-4 h-4 sm:w-6 sm:h-6" />
+        <div className="h-5  overflow-hidden flex items-center justify-center">
+          <img
+            src="/logo.png"
+            alt={t('app.name', { defaultValue: 'Dug assistant' })}
+            className="w-full h-full object-cover"
+          />
         </div>
         <h1 className="font-serif text-lg sm:text-2xl font-semibold tracking-tight text-primary">
-          EduFlow <span className="italic font-normal">AI</span>
+          {t('app.name', { defaultValue: 'Dug assistant' })}
         </h1>
       </div>
-      <button className="text-primary hover:opacity-80 transition-opacity p-1">
-        <User className="w-6 h-6 sm:w-8 sm:h-8" />
-      </button>
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          className="text-primary hover:opacity-80 transition-opacity px-2 py-1 font-mono text-[10px] uppercase tracking-widest border border-outline-variant/20 bg-white/40"
+          onClick={() => {
+            const next = current === 'fr' ? 'en' : 'fr';
+            writeLangToStorage(next);
+            void i18n.changeLanguage(next);
+          }}
+          aria-label="Toggle language"
+        >
+          {current.toUpperCase()}
+        </button>
+        <button className="text-primary hover:opacity-80 transition-opacity p-1" type="button">
+          <User className="w-6 h-6 sm:w-8 sm:h-8" />
+        </button>
+      </div>
     </header>
   );
 };
 
 export const BottomNav: React.FC = () => {
+  const { t } = useTranslation();
   const navItems = [
-    { icon: Home, label: 'Home', path: '/' },
-    { icon: Users, label: 'Children', path: '/children' },
-    { icon: BarChart3, label: 'Reports', path: '/reports' },
-    { icon: Bell, label: 'Inbox', path: '/notifications' },
-    { icon: User, label: 'Profile', path: '/profile' },
+    { icon: Home, label: t('nav.home', { defaultValue: 'Home' }), path: '/' },
+    { icon: Users, label: t('nav.children', { defaultValue: 'Children' }), path: '/children' },
+    { icon: BarChart3, label: t('nav.reports', { defaultValue: 'Reports' }), path: '/reports' },
+    { icon: Bell, label: t('nav.inbox', { defaultValue: 'Inbox' }), path: '/notifications' },
+    // { icon: User, label: 'Profile', path: '/profile' },
   ];
 
   return (

@@ -1,6 +1,6 @@
 {
-  "name": "EduFlow AI",
-  "short_name": "EduFlow",
+  "name": "Dug assistant",
+  "short_name": "Dug assistant",
   "description": "Sophisticated educational platform for tracking student dossiers.",
   "start_url": "/",
   "display": "standalone",

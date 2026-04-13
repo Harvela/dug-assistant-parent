@@ -1,0 +1,169 @@
+{
+  "app": {
+    "name": "Dug assistant"
+  },
+  "nav": {
+    "home": "Home",
+    "children": "Children",
+    "reports": "Reports",
+    "inbox": "Inbox",
+    "profile": "Profile"
+  },
+  "common": {
+    "loading": "Loading…",
+    "errorGeneric": "Something went wrong",
+    "back": "Back",
+    "viewChildren": "View children",
+    "latestReport": "Latest report",
+    "generateReport": "Generate report",
+    "refresh": "Refresh",
+    "updatedAt": "Updated {{date}}"
+  },
+  "dashboard": {
+    "welcome": "Welcome back",
+    "signedInAs": "Signed in as {{email}}",
+    "parentLabel": "Parent",
+    "priorityFocus": "Priority Focus",
+    "fromYourData": "From your data",
+    "attendanceFirstChild": "Attendance (family overview)",
+    "finance": "Finance",
+    "behavior": "Attendance",
+    "aiInsight": "AI Curated Insight",
+    "connectHint": "Connect to the API and generate a report to see tailored guidance here.",
+    "urgentChildren": "Urgent children",
+    "watchChildren": "Watch items",
+    "linkedChildren": "Linked children",
+    "latestReportCard": "Latest report",
+    "noneShort": "None",
+    "actionableChildren": "Children needing attention",
+    "openWeeklyReport": "Open the weekly report for detailed guidance.",
+    "feesOutstanding": "Fees due",
+    "noPriorityChildren": "No urgent weekly issues are visible right now.",
+    "severity": {
+      "urgent": "Urgent",
+      "watch": "Watch",
+      "ok": "Stable"
+    },
+    "finance": {
+      "totalDue": "Total fees due",
+      "duePerChild": "Due per child"
+    },
+    "risk": {
+      "failChance": "Fail chance"
+    }
+  },
+  "report": {
+    "attendance": "Attendance",
+    "pctValue": "{{n}}%",
+    "recordsCount": "{{n}} records",
+    "narrativeParseError": "The narrative could not be structured. The facts are still shown below.",
+    "kpiAttendanceWeek": "Attendance this week",
+    "kpiOutstanding": "Outstanding fees",
+    "kpiWeekPaid": "Paid this week",
+    "kpiWeakSubject": "Main learning concern",
+    "kpiStrongSubject": "Strong subject",
+    "kpiConductWeek": "Conduct notes this week",
+    "financeRisk": "Fee risk",
+    "sectionAcademic": "Academic summary",
+    "sectionFinance": "Fees summary",
+    "sectionPresence": "Attendance and behavior",
+    "strengthPrefix": "Strength: {{text}}",
+    "weaknessPrefix": "Needs support: {{text}}",
+    "chartAttendanceWeek": "Attendance this week",
+    "chartWeakSubjects": "Subjects needing support",
+    "chartMonthlyPaid": "Payments over time",
+    "emptyChart": "No chart data available.",
+    "emptyPayments": "No monthly payment history.",
+    "legendPresent": "Present",
+    "legendLate": "Late",
+    "legendAbsent": "Absent",
+    "avgRatio": "Average %",
+    "paid": "Paid",
+    "tableRecentMarks": "Recent marks",
+    "colSubject": "Subject",
+    "colScore": "Score",
+    "colRatio": "%",
+    "insights": "Key alerts",
+    "nextSteps": "Suggested next steps",
+    "summaryLine": "Summary",
+    "cards": {
+      "situationTitle": "Situation overview",
+      "keyAlerts": "Key alerts",
+      "alertDefaultTitle": "To review",
+      "alertDefaultDetail": "See details below.",
+      "attendanceLabel": "Attendance",
+      "attendanceThisWeek": "This week",
+      "attendanceWeekTitle": "Attendance this week",
+      "attendanceAvg": "Average attendance: {{n}}%",
+      "attendanceAvgNA": "Average attendance: —",
+      "globalStatus": "Overall status",
+      "pointsAttention": "Points of attention",
+      "alertCount": "{{n}} alerts",
+      "supportSubjectsTitle": "Subjects needing support",
+      "supportSubjectsEmpty": "No priority subject detected this week.",
+      "paymentsTitle": "Payments over time",
+      "paidChip": "Paid",
+      "pendingChip": "Pending",
+      "pendingHint": "To pay",
+      "strengths": "Strengths",
+      "concerns": "Concerns",
+      "paidThisYear": "Paid (year)",
+      "actionsEmpty": "No recommended actions for this week yet.",
+      "action": "Action",
+      "actionHint": "Suggested from this week’s report."
+    },
+    "cta": {
+      "pay_now": "Pay now",
+      "plan_tutoring": "Plan tutoring",
+      "contact_school": "Contact the school"
+    },
+    "risk": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "status": {
+      "stable": "Stable progress",
+      "watch": "Needs monitoring",
+      "needs_attention": "Needs attention"
+    },
+    "alertTitle": {
+      "fees_due": "Fees need attention",
+      "attendance_drop": "Attendance has dropped",
+      "support_subjects": "Support is needed",
+      "all_good": "All good this week"
+    },
+    "failRisk": {
+      "title": "Failure risk",
+      "defaultText": "Estimated from this week’s data.",
+      "prob": "prob."
+    },
+    "paymentPlans": {
+      "open": "Payment plan",
+      "monthly": "monthly",
+      "months": "{{n}} months",
+      "selected": "Selected"
+    }
+  },
+  "childReport": {
+    "title": "Report details",
+    "subtitle": "Full analysis of weekly performance and engagement.",
+    "pickWeek": "Choose a week",
+    "noReports": "No reports yet."
+  },
+  "children": {
+    "title": "Children",
+    "linkedHint": "Linked to your parent account",
+    "noChildren": "No children linked yet.",
+    "open": "Open",
+    "report": "Report"
+  },
+  "auth": {
+    "loginTitle": "Parent portal",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…"
+  }
+}
+

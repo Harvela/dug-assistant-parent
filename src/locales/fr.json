@@ -1,0 +1,169 @@
+{
+  "app": {
+    "name": "Dug assistant"
+  },
+  "nav": {
+    "home": "Accueil",
+    "children": "Enfants",
+    "reports": "Rapports",
+    "inbox": "Boîte",
+    "profile": "Profil"
+  },
+  "common": {
+    "loading": "Chargement…",
+    "errorGeneric": "Une erreur est survenue",
+    "back": "Retour",
+    "viewChildren": "Voir les enfants",
+    "latestReport": "Dernier rapport",
+    "generateReport": "Générer un rapport",
+    "refresh": "Actualiser",
+    "updatedAt": "Mis à jour {{date}}"
+  },
+  "dashboard": {
+    "welcome": "Bon retour",
+    "signedInAs": "Connecté en tant que {{email}}",
+    "parentLabel": "Parent",
+    "priorityFocus": "Priorités",
+    "fromYourData": "À partir de vos données",
+    "attendanceFirstChild": "Présence (vue famille)",
+    "finance": "Finances",
+    "behavior": "Présence",
+    "aiInsight": "Conseil IA",
+    "connectHint": "Connectez l’API et générez un rapport pour obtenir des conseils adaptés.",
+    "urgentChildren": "Enfants urgents",
+    "watchChildren": "Points à surveiller",
+    "linkedChildren": "Enfants liés",
+    "latestReportCard": "Dernier rapport",
+    "noneShort": "Aucun",
+    "actionableChildren": "Enfants qui demandent une action",
+    "openWeeklyReport": "Ouvrez le rapport hebdomadaire pour voir les conseils détaillés.",
+    "feesOutstanding": "Frais dus",
+    "noPriorityChildren": "Aucun problème hebdomadaire urgent n’est visible pour le moment.",
+    "severity": {
+      "urgent": "Urgent",
+      "watch": "À surveiller",
+      "ok": "Stable"
+    },
+    "finance": {
+      "totalDue": "Total des frais dus",
+      "duePerChild": "Détail par enfant"
+    },
+    "risk": {
+      "failChance": "Risque d’échec"
+    }
+  },
+  "report": {
+    "attendance": "Présence",
+    "pctValue": "{{n}}%",
+    "recordsCount": "{{n}} enregistrements",
+    "narrativeParseError": "Le récit n’a pas pu être structuré. Les faits restent visibles ci-dessous.",
+    "kpiAttendanceWeek": "Présence cette semaine",
+    "kpiOutstanding": "Frais restants",
+    "kpiWeekPaid": "Payé cette semaine",
+    "kpiWeakSubject": "Point d’apprentissage principal",
+    "kpiStrongSubject": "Matière forte",
+    "kpiConductWeek": "Notes de conduite cette semaine",
+    "financeRisk": "Risque sur les frais",
+    "sectionAcademic": "Résumé scolaire",
+    "sectionFinance": "Résumé des frais",
+    "sectionPresence": "Présence et comportement",
+    "strengthPrefix": "Point fort : {{text}}",
+    "weaknessPrefix": "Besoin d’aide : {{text}}",
+    "chartAttendanceWeek": "Présence cette semaine",
+    "chartWeakSubjects": "Matières à soutenir",
+    "chartMonthlyPaid": "Paiements dans le temps",
+    "emptyChart": "Aucune donnée pour le graphique.",
+    "emptyPayments": "Aucun historique mensuel de paiement.",
+    "legendPresent": "Présent",
+    "legendLate": "Retard",
+    "legendAbsent": "Absent",
+    "avgRatio": "Moyenne %",
+    "paid": "Payé",
+    "tableRecentMarks": "Notes récentes",
+    "colSubject": "Matière",
+    "colScore": "Note",
+    "colRatio": "%",
+    "insights": "Alertes clés",
+    "nextSteps": "Prochaines actions conseillées",
+    "summaryLine": "Résumé",
+    "cards": {
+      "situationTitle": "Aperçu de la Situation",
+      "keyAlerts": "Alertes clés",
+      "alertDefaultTitle": "À surveiller",
+      "alertDefaultDetail": "Voir les détails ci-dessous.",
+      "attendanceLabel": "Présence",
+      "attendanceThisWeek": "Cette semaine",
+      "attendanceWeekTitle": "Présence Cette Semaine",
+      "attendanceAvg": "Taux d’assiduité moyen : {{n}}%",
+      "attendanceAvgNA": "Taux d’assiduité moyen : —",
+      "globalStatus": "Statut Global",
+      "pointsAttention": "Points d'Attention",
+      "alertCount": "{{n}} alertes",
+      "supportSubjectsTitle": "Matières à Soutenir",
+      "supportSubjectsEmpty": "Aucune matière prioritaire détectée cette semaine.",
+      "paymentsTitle": "Paiements dans le Temps",
+      "paidChip": "Payé",
+      "pendingChip": "En attente",
+      "pendingHint": "À régler",
+      "strengths": "Points forts",
+      "concerns": "Points de vigilance",
+      "paidThisYear": "Montant payé (année)",
+      "actionsEmpty": "Aucune action recommandée pour cette semaine.",
+      "action": "Action",
+      "actionHint": "Suggéré à partir du rapport de la semaine."
+    },
+    "cta": {
+      "pay_now": "Régulariser maintenant",
+      "plan_tutoring": "Planifier un tutorat",
+      "contact_school": "Contacter l’école"
+    },
+    "risk": {
+      "high": "Élevé",
+      "medium": "Moyen",
+      "low": "Faible"
+    },
+    "status": {
+      "stable": "Progression stable",
+      "watch": "À surveiller",
+      "needs_attention": "Attention requise"
+    },
+    "alertTitle": {
+      "fees_due": "Frais à régulariser",
+      "attendance_drop": "Baisse de présence",
+      "support_subjects": "Besoin de soutien",
+      "all_good": "Tout va bien cette semaine"
+    },
+    "failRisk": {
+      "title": "Risque d’échec",
+      "defaultText": "Estimé à partir des données de cette semaine.",
+      "prob": "prob."
+    },
+    "paymentPlans": {
+      "open": "Plan de paiement",
+      "monthly": "mensuel",
+      "months": "{{n}} mois",
+      "selected": "Sélectionné"
+    }
+  },
+  "childReport": {
+    "title": "Détails des Rapports",
+    "subtitle": "Analyse complète des performances et de l'engagement hebdomadaire.",
+    "pickWeek": "Choisir une semaine",
+    "noReports": "Aucun rapport pour le moment."
+  },
+  "children": {
+    "title": "Enfants",
+    "linkedHint": "Liés à votre compte parent",
+    "noChildren": "Aucun enfant lié pour le moment.",
+    "open": "Ouvrir",
+    "report": "Rapport"
+  },
+  "auth": {
+    "loginTitle": "Portail parent",
+    "email": "Email",
+    "password": "Mot de passe",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion…"
+  }
+}
+

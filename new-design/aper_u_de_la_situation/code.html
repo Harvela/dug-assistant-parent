@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aperçu de la Situation - Dug Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#410006",
+                    "tertiary-fixed": "#ffdf96",
+                    "primary-container": "#2d5a54",
+                    "secondary-container": "#fe807e",
+                    "surface-container": "#e8efec",
+                    "secondary-fixed-dim": "#ffb3b0",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#161d1b",
+                    "error-container": "#ffdad6",
+                    "background": "#f4fbf8",
+                    "primary": "#13423d",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#204e48",
+                    "outline": "#707977",
+                    "surface-tint": "#396660",
+                    "on-secondary-container": "#74171d",
+                    "on-tertiary-container": "#e7c268",
+                    "surface-variant": "#dde4e1",
+                    "on-surface": "#161d1b",
+                    "secondary-fixed": "#ffdad8",
+                    "on-tertiary-fixed": "#251a00",
+                    "tertiary-container": "#684f00",
+                    "inverse-on-surface": "#ebf2ef",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed-variant": "#5a4400",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#404847",
+                    "on-secondary-fixed-variant": "#842327",
+                    "surface-container-highest": "#dde4e1",
+                    "on-primary-fixed": "#00201d",
+                    "surface-dim": "#d4dcd9",
+                    "inverse-surface": "#2b3230",
+                    "primary-fixed": "#bcece4",
+                    "tertiary-fixed-dim": "#e7c268",
+                    "on-primary-container": "#a1cfc8",
+                    "surface": "#f4fbf8",
+                    "secondary": "#a33b3d",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#4c3900",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#eef5f2",
+                    "surface-bright": "#f4fbf8",
+                    "primary-fixed-dim": "#a1d0c8",
+                    "inverse-primary": "#a1d0c8",
+                    "outline-variant": "#c0c8c6",
+                    "surface-container-high": "#e3eae7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Work Sans"],
+                    "label": ["Work Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Work Sans', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            background-color: rgba(244, 251, 248, 0.8);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-6 py-3 h-16 glass-nav sticky top-0 z-50 shadow-[0_24px_24px_-12px_rgba(19,66,61,0.06)]">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary p-2 hover:bg-primary/10 rounded-full transition-colors active:scale-95" data-icon="menu">menu</button>
+<h1 class="text-xl font-extrabold text-primary tracking-tight">Dug Assistant</h1>
+</div>
+<div class="h-10 w-10 rounded-full bg-primary-container flex items-center justify-center text-white overflow-hidden shadow-sm">
+<img alt="Parent Profile" class="h-full w-full object-cover" data-alt="Professional studio portrait of a smiling woman with warm lighting and a soft teal background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXbLqCwayVYw2qoB5p297Ie3OVr_WISyMYTEuB2glCc3Zvfz8uz2vGuynjhfgpXqOdfNE5DEC6IbLz_36ot_Xa0TLUdbZyVkjprC8DJXJfiWntwZBR76kZEvYwd3NITnkFi96mJesKS1Hv6WEfN78FwZVVqggmcYyGheC1vXUFloCEOijAS6kdUBVC1G4azl7VXtxKDeh91dZ3G9jTzkqEs7VPdoVrJPKsmHcD26gWn-AqJcelZthDSkX12Dgl_O_ApLB16M2h0sg"/>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6 pt-8">
+<!-- Title & Hero Insight -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="text-3xl font-extrabold text-primary tracking-tight mb-2">Aperçu de la Situation</h2>
+<p class="text-on-surface-variant max-w-lg">Analyse consolidée de la performance académique et de la santé financière pour le trimestre en cours.</p>
+</div>
+<!-- Status Card: Risque sur les frais -->
+<div class="bg-surface-container-low rounded-xl p-5 border-l-4 border-tertiary-fixed-dim flex items-center gap-4 shadow-sm min-w-[280px]">
+<div class="h-12 w-12 rounded-full bg-tertiary-fixed/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div>
+<p class="text-xs font-semibold text-outline uppercase tracking-wider">Risque sur les frais</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-lg font-bold text-primary">MEDIUM</span>
+<span class="px-2 py-0.5 bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold rounded-full uppercase">Action requise</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Résumé Scolaire (Editorial Style) -->
+<section class="md:col-span-7 bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-xl font-bold text-primary">Résumé Scolaire</h3>
+<span class="material-symbols-outlined text-outline" data-icon="school">school</span>
+</div>
+<div class="grid grid-cols-1 gap-8">
+<!-- Strengths -->
+<div class="relative pl-6">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container/20 rounded-full"></div>
+<h4 class="text-sm font-bold text-primary-container uppercase tracking-widest mb-4">Points Forts</h4>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container text-lg" data-icon="check_circle">check_circle</span>
+<div>
+<p class="font-semibold text-on-surface">Excellence en Mathématiques</p>
+<p class="text-sm text-on-surface-variant">Progression constante de +15% sur les évaluations mensuelles.</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container text-lg" data-icon="check_circle">check_circle</span>
+<div>
+<p class="font-semibold text-on-surface">Participation Active</p>
+<p class="text-sm text-on-surface-variant">Engagement exemplaire lors des sessions de travaux pratiques.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Weaknesses -->
+<div class="relative pl-6">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary/20 rounded-full"></div>
+<h4 class="text-sm font-bold text-secondary uppercase tracking-widest mb-4">Points de Vigilance</h4>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="error">error</span>
+<div>
+<p class="font-semibold text-on-surface">Expression Écrite</p>
+<p class="text-sm text-on-surface-variant">Nécessite une attention particulière sur la structure des argumentations.</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="error">error</span>
+<div>
+<p class="font-semibold text-on-surface">Gestion du Temps</p>
+<p class="text-sm text-on-surface-variant">Difficultés à terminer les examens blancs dans les délais impartis.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Résumé des Frais (Visual Focus) -->
+<section class="md:col-span-5 flex flex-col gap-6">
+<!-- Main Fee Card -->
+<div class="bg-primary text-white rounded-xl p-8 shadow-lg relative overflow-hidden h-full">
+<!-- Decor texture -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/20 rounded-full -mr-16 -mt-16"></div>
+<h3 class="text-xl font-bold mb-8 relative z-10">Résumé des Frais</h3>
+<div class="space-y-8 relative z-10">
+<div>
+<p class="text-primary-fixed/60 text-sm font-medium mb-1">Montant Payé</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-extrabold tracking-tighter">1,250</span>
+<span class="text-lg text-primary-fixed/80">EUR</span>
+</div>
+</div>
+<div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed w-[65%]"></div>
+</div>
+<div>
+<p class="text-secondary-fixed/60 text-sm font-medium mb-1">Reste à Payer</p>
+<div class="flex items-baseline gap-2 text-secondary-fixed">
+<span class="text-3xl font-bold tracking-tighter">450</span>
+<span class="text-base opacity-80">EUR</span>
+</div>
+</div>
+</div>
+<button class="mt-8 w-full py-4 bg-primary-container text-white font-bold rounded-xl hover:bg-primary-container/90 transition-all active:scale-95 shadow-md">
+                        Régler le solde
+                    </button>
+</div>
+<!-- Quick Insight Tile -->
+<div class="bg-surface-container-high rounded-xl p-6 flex items-center justify-between">
+<div>
+<p class="text-xs font-bold text-outline uppercase mb-1">Présence</p>
+<p class="text-2xl font-extrabold text-primary">98%</p>
+</div>
+<div class="h-12 w-12 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Secondary Section: Prochaines Étapes -->
+<div class="mt-12">
+<h3 class="text-lg font-bold text-primary mb-6">Actions Recommandées</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-low p-6 rounded-xl group hover:bg-surface-container-lowest transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary mb-4 p-2 bg-primary/5 rounded-lg group-hover:bg-primary/10" data-icon="event_note">event_note</span>
+<p class="font-bold text-on-surface mb-2">Réunion Parent-Prof</p>
+<p class="text-sm text-on-surface-variant">Prévue pour le 15 Octobre à 16:30.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl group hover:bg-surface-container-lowest transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary mb-4 p-2 bg-primary/5 rounded-lg group-hover:bg-primary/10" data-icon="receipt_long">receipt_long</span>
+<p class="font-bold text-on-surface mb-2">Facturation</p>
+<p class="text-sm text-on-surface-variant">Télécharger le reçu du mois dernier.</p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl group hover:bg-surface-container-lowest transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary mb-4 p-2 bg-primary/5 rounded-lg group-hover:bg-primary/10" data-icon="auto_awesome">auto_awesome</span>
+<p class="font-bold text-on-surface mb-2">Conseils d'étude</p>
+<p class="text-sm text-on-surface-variant">3 nouvelles ressources pour l'expression écrite.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-2 pb-6 bg-[#F4FBF8] dark:bg-emerald-950 border-t border-[#C0C8C6]/15 z-50">
+<a class="flex flex-col items-center justify-center bg-[#2D5A54] text-white rounded-[1.5rem] px-4 py-2 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Work_Sans'] text-[10px] font-semibold uppercase tracking-wider mt-1">Accueil</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#13423D]/60 p-2 hover:bg-[#2D5A54]/5 rounded-xl transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="child_care">child_care</span>
+<span class="font-['Work_Sans'] text-[10px] font-semibold uppercase tracking-wider mt-1">Enfants</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#13423D]/60 p-2 hover:bg-[#2D5A54]/5 rounded-xl transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-['Work_Sans'] text-[10px] font-semibold uppercase tracking-wider mt-1">Rapports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#13423D]/60 p-2 hover:bg-[#2D5A54]/5 rounded-xl transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="inbox">inbox</span>
+<span class="font-['Work_Sans'] text-[10px] font-semibold uppercase tracking-wider mt-1">Boîte</span>
+</a>
+</nav>
+</body></html>
