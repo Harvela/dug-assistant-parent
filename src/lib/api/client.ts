@@ -110,6 +110,28 @@ export async function apiJson<T>(path: string, init?: RequestInit): Promise<T> {
   return res.json() as Promise<T>;
 }
 
+export async function apiVoid(path: string, init?: RequestInit): Promise<void> {
+  const res = await apiRequest(path, init);
+  if (!res.ok) {
+    let err: ApiError = {
+      statusCode: res.status,
+      message: [res.statusText],
+    };
+    try {
+      const j = (await res.json()) as { statusCode?: number; message?: unknown };
+      err = {
+        statusCode: j.statusCode ?? res.status,
+        message: Array.isArray(j.message)
+          ? j.message.map(String)
+          : [String(j.message ?? res.statusText)],
+      };
+    } catch {
+      /* ignore */
+    }
+    throw err;
+  }
+}
+
 export async function loginRequest(
   email: string,
   password: string,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Users, BarChart3, Bell, User, LayoutGrid } from 'lucide-react';
+import { Home, Users, BarChart3, Bell, User } from 'lucide-react';
+import { useParentCommuniquesUnreadCountQuery } from '../hooks/parentCommuniquesQueries';
 import { cn } from '../lib/utils';
 import { useTranslation } from 'react-i18next';
 import i18n from '../i18n';
@@ -46,6 +47,8 @@ export const TopBar: React.FC = () => {
 
 export const BottomNav: React.FC = () => {
   const { t } = useTranslation();
+  const { data: unread } = useParentCommuniquesUnreadCountQuery();
+  const unreadN = unread?.unreadThreads ?? 0;
   const navItems = [
     { icon: Home, label: t('nav.home', { defaultValue: 'Home' }), path: '/' },
     { icon: Users, label: t('nav.children', { defaultValue: 'Children' }), path: '/children' },
@@ -60,30 +63,41 @@ export const BottomNav: React.FC = () => {
         <NavLink
           key={item.path}
           to={item.path}
-          className={({ isActive }) =>
-            cn(
-              "flex flex-col items-center justify-center min-w-[64px] py-1.5 transition-all duration-300 relative group",
-              isActive 
-                ? "text-primary" 
-                : "text-on-surface/40 hover:text-primary"
-            )
-          }
+          end={item.path === '/'}
+          className="flex flex-col items-center justify-center min-w-[64px] py-1.5 transition-all duration-300 relative group active:scale-[0.97]"
         >
-          <div className={cn(
-            "p-2 rounded-2xl transition-all duration-300 relative z-10",
-            "group-active:scale-90",
-            "aria-[current=page]:bg-primary/10"
-          )}>
-            <item.icon className={cn("w-6 h-6 transition-transform duration-300")} />
-          </div>
-          <span className="font-mono text-[8px] uppercase tracking-[0.15em] mt-1 font-bold transition-colors duration-300">
-            {item.label}
-          </span>
-          <div className={cn(
-            "absolute bottom-0 h-0.5 w-4 rounded-full bg-primary transition-all duration-500",
-            "opacity-0 scale-x-0",
-            "aria-[current=page]:opacity-100 aria-[current=page]:scale-x-100"
-          )} />
+          {({ isActive }) => (
+            <>
+              <div
+                className={cn(
+                  'p-2 rounded-2xl transition-all duration-300 relative z-10',
+                  isActive ? 'bg-primary text-white shadow-sm' : 'text-on-surface/40 group-hover:text-primary',
+                )}
+              >
+                <span className="relative inline-flex">
+                  <item.icon className="w-6 h-6" />
+                  {item.path === '/notifications' && unreadN > 0 ? (
+                    <span
+                      className={cn(
+                        'absolute -right-1 -top-1 min-w-[14px] h-[14px] px-0.5 rounded-full text-[9px] font-bold flex items-center justify-center',
+                        isActive ? 'bg-white text-primary' : 'bg-secondary text-white',
+                      )}
+                    >
+                      {unreadN > 9 ? '9+' : unreadN}
+                    </span>
+                  ) : null}
+                </span>
+              </div>
+              <span
+                className={cn(
+                  'font-mono text-[8px] uppercase tracking-[0.15em] mt-1 font-bold transition-colors',
+                  isActive ? 'text-primary' : 'text-on-surface/40',
+                )}
+              >
+                {item.label}
+              </span>
+            </>
+          )}
         </NavLink>
       ))}
     </nav>
