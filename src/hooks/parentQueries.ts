@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { apiJson } from '../lib/api/client';
 import { queryKeys } from '../lib/query/queryKeys';
+import type {
+  ParentFinanceSnapshotDto,
+  ParentYearBulletinGridDto,
+} from '../types/liveSnapshot';
 
 export type ParentChildDto = {
   id: string;
@@ -116,6 +120,100 @@ export function useChildAnalysisReport(
         `/parent/students/${studentId}/analysis-reports/${reportId}`,
       ),
     enabled: Boolean(studentId && reportId),
+  });
+}
+
+export type ParentAcademicYearListItem = {
+  id: string;
+  name: string;
+  isActive?: boolean;
+};
+
+export function useParentAcademicYearsQuery() {
+  return useQuery({
+    queryKey: queryKeys.academicYears,
+    queryFn: () => apiJson<ParentAcademicYearListItem[]>('/parent/academic-years'),
+  });
+}
+
+export type ParentAttendanceDailyDto = {
+  day: string;
+  arrivalTime: string | null;
+  exitTime: string | null;
+  transportPoints: Array<{
+    kind: string;
+    scannedAt: string;
+    latitude: number;
+    longitude: number;
+  }>;
+  events: Array<{
+    scannedAt: string;
+    scanKind: string;
+    statusRecorded: string;
+    latitude: number | null;
+    longitude: number | null;
+  }>;
+};
+
+export function useChildAttendanceDaily(
+  studentId: string | undefined,
+  day: string | undefined,
+  options?: { enabled?: boolean },
+) {
+  const enabled =
+    Boolean(studentId && day) && (options?.enabled !== false);
+  const qs = day ? `?day=${encodeURIComponent(day)}` : '';
+  return useQuery({
+    queryKey: queryKeys.attendanceDaily(studentId ?? '', day ?? ''),
+    queryFn: () =>
+      apiJson<ParentAttendanceDailyDto>(
+        `/parent/students/${studentId}/attendance-daily${qs}`,
+      ),
+    enabled,
+    staleTime: 60_000,
+  });
+}
+
+export function useChildFinanceSnapshot(
+  studentId: string | undefined,
+  academicYearId: string | undefined,
+  asOf: string | undefined,
+  options?: { enabled?: boolean },
+) {
+  const enabled = options?.enabled !== false;
+  const qs = new URLSearchParams();
+  if (academicYearId) qs.set('academicYearId', academicYearId);
+  if (asOf) qs.set('asOf', asOf);
+  const qstr = qs.toString();
+  return useQuery({
+    queryKey: queryKeys.financeSnapshot(
+      studentId ?? '',
+      academicYearId ?? '',
+      asOf ?? '',
+    ),
+    queryFn: () =>
+      apiJson<ParentFinanceSnapshotDto>(
+        `/parent/students/${studentId}/finance-snapshot${qstr ? `?${qstr}` : ''}`,
+      ),
+    enabled: Boolean(studentId && academicYearId) && enabled,
+  });
+}
+
+export function useChildAcademicProgress(
+  studentId: string | undefined,
+  academicYearId: string | undefined,
+  options?: { enabled?: boolean },
+) {
+  const enabled = options?.enabled !== false;
+  const qs = new URLSearchParams();
+  if (academicYearId) qs.set('academicYearId', academicYearId);
+  return useQuery({
+    queryKey: queryKeys.academicProgress(studentId ?? '', academicYearId ?? ''),
+    queryFn: () =>
+      apiJson<ParentYearBulletinGridDto>(
+        `/parent/students/${studentId}/academic-progress?${qs.toString()}`,
+      ),
+    enabled: Boolean(studentId && academicYearId) && enabled,
   });
 }
 

@@ -18,6 +18,13 @@ export const queryKeys = {
     ['parent', 'analysis-reports', studentId] as const,
   analysisReport: (studentId: string, reportId: string) =>
     ['parent', 'analysis-report', studentId, reportId] as const,
+  academicYears: ['parent', 'academic-years'] as const,
+  financeSnapshot: (studentId: string, academicYearId: string, asOf: string) =>
+    ['parent', 'finance-snapshot', studentId, academicYearId, asOf] as const,
+  academicProgress: (studentId: string, academicYearId: string) =>
+    ['parent', 'academic-progress', studentId, academicYearId] as const,
+  attendanceDaily: (studentId: string, day: string) =>
+    ['parent', 'attendance-daily', studentId, day] as const,
   parentCommuniques: {
     threads: (p: ParentCommuniquesListParams) => ['parent', 'communiques', 'threads', p] as const,
     messages: (threadId: string) => ['parent', 'communiques', 'messages', threadId] as const,

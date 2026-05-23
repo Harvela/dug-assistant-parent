@@ -46,7 +46,12 @@
     },
     "finance": {
       "totalDue": "Total des frais dus",
-      "duePerChild": "Détail par enfant"
+      "duePerChild": "Détail par enfant",
+      "liveBalance": "Solde en direct (facturation)",
+      "liveShort": "Direct",
+      "liveUnavailable": "Année scolaire non chargée.",
+      "liveError": "Impossible d’actualiser la facturation en direct. Réessayez ou ouvrez Rapports.",
+      "livePartial": "Facturation affichée pour {{n}} enfant(s) sur {{total}}."
     },
     "risk": {
       "failChance": "Risque d’échec"
@@ -143,6 +148,32 @@
       "monthly": "mensuel",
       "months": "{{n}} mois",
       "selected": "Sélectionné"
+    },
+    "mode": {
+      "weekly": "Rapport hebdomadaire",
+      "live": "Instantané (direct)"
+    },
+    "weekly": {
+      "pickPeriod": "Période du rapport"
+    },
+    "live": {
+      "academicYear": "Année scolaire",
+      "sectionFinance": "Frais (direct)",
+      "sectionAcademic": "Progression académique (bulletin)",
+      "financeError": "Impossible de charger l’aperçu des frais.",
+      "academicError": "Impossible de charger la progression au bulletin.",
+      "legacyDisclaimer": "Les lignes par frais peuvent être approximatives avec un ancien plan de paiement combiné.",
+      "totalRemaining": "Restant cette année",
+      "remaining": "Restant",
+      "colFee": "Frais",
+      "yearAveragePct": "Moyenne annuelle",
+      "classContext": "Classe / année",
+      "pct": "%",
+      "noSubjectPct": "Aucun pourcentage par matière pour cette année pour l’instant.",
+      "personnelDiscountNote": "Des remises liées au personnel s’appliquent aux montants attendus pour cet enfant.",
+      "colExpectedAnnual": "Attendu annuel",
+      "colPaidYtd": "Payé (année)",
+      "colRemaining": "Reste"
     }
   },
   "childReport": {

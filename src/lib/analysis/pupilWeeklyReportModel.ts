@@ -80,6 +80,7 @@ export type PupilWeeklyFactsView = {
     weekPaid: number | null;
     paidInYear: number | null;
     outstandingEstimate: number | null;
+    outstandingByCurrency: { USD: number; CDF: number } | null;
     expectedForGrade: number | null;
     transactionCount: number | null;
     monthlyPaidCompleted: { month: string; totalPaid: number }[];
@@ -128,6 +129,19 @@ export function parsePupilWeeklyFacts(factsJson: Record<string, unknown>): Pupil
       .filter((x) => x.month);
   }
 
+  const obc = asRecord(finance?.outstandingByCurrency);
+  const outstandingByCurrency =
+    obc &&
+    (typeof obc.USD === 'number' ||
+      typeof obc.CDF === 'number' ||
+      typeof obc.USD === 'string' ||
+      typeof obc.CDF === 'string')
+      ? {
+          USD: safeNum(obc.USD) ?? 0,
+          CDF: safeNum(obc.CDF) ?? 0,
+        }
+      : null;
+
   return {
     kind: asString(factsJson.kind),
     frameworkVersion: asString(factsJson.frameworkVersion),
@@ -163,6 +177,7 @@ export function parsePupilWeeklyFacts(factsJson: Record<string, unknown>): Pupil
       weekPaid: safeNum(finance?.weekPaid),
       paidInYear: safeNum(finance?.paidInYear),
       outstandingEstimate: safeNum(finance?.outstandingEstimate),
+      outstandingByCurrency,
       expectedForGrade: safeNum(finance?.expectedForGrade),
       transactionCount: safeNum(finance?.transactionCount),
       monthlyPaidCompleted,

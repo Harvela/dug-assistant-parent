@@ -1,10 +1,19 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { AlertTriangle, BookOpen, Eye, Wallet, Clock3, ChevronRight } from 'lucide-react';
+import { useQueries } from '@tanstack/react-query';
+import { AlertTriangle, BookOpen, Eye, Clock3, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Layout } from './components/Layout';
 import { loadSession } from './lib/auth/session';
-import { useParentChildren, useParentAnalysisOverview } from './hooks/parentQueries';
+import {
+  useParentChildren,
+  useParentAnalysisOverview,
+  useParentAcademicYearsQuery,
+} from './hooks/parentQueries';
+import type { ParentFinanceSnapshotDto } from './types/liveSnapshot';
+import { formatParentFinanceDebt } from './lib/financeDisplay';
+import { apiJson } from './lib/api/client';
+import { queryKeys } from './lib/query/queryKeys';
 import { cn } from './lib/utils';
 
 function formatErr(err: unknown): string {
@@ -47,7 +56,7 @@ function shortEmail(email: string): string {
 }
 
 function formatMoney(amount: number, currency = 'USD') {
-  return new Intl.NumberFormat(undefined, { style: 'currency', currency }).format(amount);
+  return new Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD' }).format(amount);
 }
 
 export const Dashboard: React.FC = () => {
@@ -55,6 +64,63 @@ export const Dashboard: React.FC = () => {
   const session = loadSession();
   const { data: children, isLoading, error } = useParentChildren();
   const { data: overview } = useParentAnalysisOverview();
+  const { data: academicYears = [] } = useParentAcademicYearsQuery();
+
+  const activeAcademicYearId = useMemo(
+    () => academicYears.find((y) => y.isActive)?.id ?? academicYears[0]?.id ?? '',
+    [academicYears],
+  );
+  const asOfToday = useMemo(() => new Date().toISOString().slice(0, 10), []);
+
+  const childIds = useMemo(() => (children ?? []).map((c) => c.id).filter(Boolean), [children]);
+
+  const financeLiveQueries = useQueries({
+    queries: childIds.map((studentId) => ({
+      queryKey: queryKeys.financeSnapshot(studentId, activeAcademicYearId, asOfToday),
+      queryFn: (): Promise<ParentFinanceSnapshotDto> => {
+        const qs = new URLSearchParams();
+        qs.set('academicYearId', activeAcademicYearId);
+        qs.set('asOf', asOfToday);
+        return apiJson<ParentFinanceSnapshotDto>(
+          `/parent/students/${studentId}/finance-snapshot?${qs.toString()}`,
+        );
+      },
+      enabled: Boolean(activeAcademicYearId && studentId && childIds.length > 0),
+      staleTime: 60_000,
+      refetchOnWindowFocus: true,
+    })),
+  });
+
+  const liveFinance = useMemo(() => {
+    let sumUsd = 0;
+    let withData = 0;
+    let pending = false;
+    let hasError = false;
+    let maxUpdated = 0;
+    for (const q of financeLiveQueries) {
+      if (q.isPending) pending = true;
+      if (q.isError) hasError = true;
+      if (q.dataUpdatedAt && q.dataUpdatedAt > maxUpdated) maxUpdated = q.dataUpdatedAt;
+      const snap = q.data as ParentFinanceSnapshotDto | undefined;
+      if (snap != null) {
+        if (snap.totalDebtByCurrency) {
+          sumUsd += snap.totalDebtByCurrency.USD ?? 0;
+        } else {
+          sumUsd += snap.totalDebt ?? 0;
+        }
+        withData += 1;
+      }
+    }
+    const summaryLabel = formatMoney(Math.round(sumUsd * 100) / 100);
+    return {
+      totalLiveUsd: Math.round(sumUsd * 100) / 100,
+      totalLiveLabel: summaryLabel,
+      withData,
+      pending,
+      hasError,
+      updatedAt: maxUpdated ? new Date(maxUpdated) : null,
+    };
+  }, [financeLiveQueries]);
 
   const focusItems = useMemo(() => {
     return [...(overview?.items ?? [])]
@@ -65,36 +131,13 @@ export const Dashboard: React.FC = () => {
       .slice(0, 3);
   }, [overview]);
 
-  const familyHeadline =
-    focusItems[0]?.topActions[0] ??
-    overview?.summary ??
-    t('dashboard.connectHint', {
-      defaultValue: 'Generate weekly reports to see clear guidance here.',
-    });
-
   const primaryItem = focusItems[0] ?? null;
-  const latestDate =
-    overview?.updatedAt != null ? new Date(overview.updatedAt).toLocaleDateString() : null;
 
-  const feeRisk =
-    (overview?.items ?? []).some((i) => (i.outstandingEstimate ?? 0) > 0) ||
-    (overview?.urgentCount ?? 0) > 0
-      ? (overview?.urgentCount ?? 0) > 0
-        ? 'high'
-        : (overview?.watchCount ?? 0) > 0
-          ? 'medium'
-          : 'low'
-      : null;
-
-  const totalDue = overview?.items?.reduce((sum, item) => sum + (item.outstandingEstimate ?? 0), 0) ?? 0;
-  const childrenWithDues = overview?.items?.filter(item => (item.outstandingEstimate ?? 0) > 0) ?? [];
-  
   let financeCardBg = 'bg-primary text-white';
-  if (feeRisk === 'high' || totalDue > 0) {
-    financeCardBg = feeRisk === 'high' ? 'bg-secondary text-white' : 'bg-orange-600 text-white';
-  }
-  if (totalDue === 0) {
-    financeCardBg = 'bg-primary text-white';
+  const hasAmountOwed =
+    liveFinance.totalLiveUsd > 0.005;
+  if (hasAmountOwed) {
+    financeCardBg = 'bg-orange-600 text-white';
   }
 
   return (
@@ -171,31 +214,86 @@ export const Dashboard: React.FC = () => {
           </h3>
           <div className="space-y-6 relative z-10">
             <div>
-              <p className="text-white/80 text-sm font-medium mb-1">
-                {t('dashboard.finance.totalDue', { defaultValue: 'Total des frais dus' })}
+              <p className="text-white/80 text-sm font-medium mb-1 flex flex-wrap items-center gap-x-2 gap-y-1">
+                <span>{t('dashboard.finance.liveBalance', { defaultValue: 'Live balance (billing)' })}</span>
+                {liveFinance.updatedAt ? (
+                  <span className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-widest text-white/60">
+                    <Clock3 className="w-3.5 h-3.5" aria-hidden />
+                    {t('common.updatedAt', {
+                      date: liveFinance.updatedAt.toLocaleString(undefined, {
+                        dateStyle: 'short',
+                        timeStyle: 'short',
+                      }),
+                    })}
+                  </span>
+                ) : null}
               </p>
-              <div className="text-3xl font-extrabold tracking-tighter">
-                {formatMoney(totalDue)}
-              </div>
+              {liveFinance.pending && childIds.length > 0 && activeAcademicYearId ? (
+                <p className="font-mono text-sm text-white/70">{t('common.loading')}</p>
+              ) : !activeAcademicYearId && childIds.length > 0 ? (
+                <p className="font-mono text-xs text-white/65">
+                  {t('dashboard.finance.liveUnavailable', {
+                    defaultValue: 'School year not loaded yet.',
+                  })}
+                </p>
+              ) : liveFinance.hasError && liveFinance.withData === 0 ? (
+                <p className="font-mono text-xs text-white/90">
+                  {t('dashboard.finance.liveError', {
+                    defaultValue: 'Could not refresh live billing. Pull to retry or open Reports.',
+                  })}
+                </p>
+              ) : (
+                <>
+                  <div className="text-3xl font-extrabold tracking-tighter break-words">
+                    {liveFinance.totalLiveLabel}
+                  </div>
+                  {(liveFinance.withData > 0 && liveFinance.withData < childIds.length) ||
+                  (liveFinance.hasError && liveFinance.withData > 0) ? (
+                    <p className="mt-1 font-mono text-[10px] text-white/55 uppercase tracking-widest">
+                      {t('dashboard.finance.livePartial', {
+                        defaultValue: 'Showing billing for {{n}} of {{total}} children.',
+                        n: liveFinance.withData,
+                        total: childIds.length,
+                      })}
+                    </p>
+                  ) : null}
+                </>
+              )}
             </div>
 
-            {childrenWithDues.length > 0 && (
+            {children && children.length > 0 ? (
               <div className="pt-4 border-t border-white/20">
                 <p className="text-white/80 text-sm font-medium mb-3">
                   {t('dashboard.finance.duePerChild', { defaultValue: 'Détail par enfant' })}
                 </p>
                 <div className="space-y-3">
-                  {childrenWithDues.map(child => (
-                    <div key={child.studentId} className="flex justify-between items-center text-sm">
-                      <span className="font-bold">{child.studentName}</span>
-                      <span className="font-bold">{formatMoney(child.outstandingEstimate ?? 0)}</span>
-                    </div>
-                  ))}
+                  {childIds.map((studentId, i) => {
+                    const child = children.find((c) => c.id === studentId);
+                    const snap = financeLiveQueries[i]?.data as ParentFinanceSnapshotDto | undefined;
+                    const name = child?.name ?? studentId;
+                    const rowPending =
+                      financeLiveQueries[i]?.isPending && snap === undefined && activeAcademicYearId;
+                    return (
+                      <div
+                        key={studentId}
+                        className="flex justify-between items-center gap-3 text-sm"
+                      >
+                        <span className="font-bold truncate min-w-0">{name}</span>
+                        <span className="font-bold font-mono tabular-nums shrink-0">
+                          {rowPending
+                            ? '…'
+                            : snap !== undefined
+                              ? formatParentFinanceDebt(snap)
+                              : '—'}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-            )}
+            ) : null}
           </div>
-          {totalDue > 0 && (
+          {hasAmountOwed && (
             <Link to="/reports" className="mt-6 w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-white/90 transition-all active:scale-95 shadow-md relative z-10 flex justify-center items-center">
               {t('report.cta.pay_now', { defaultValue: 'Régler le solde' })}
             </Link>

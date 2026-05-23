@@ -10,12 +10,15 @@ import { MessagesInbox } from './pages/messages/MessagesInbox';
 import { ThreadConversation } from './pages/messages/ThreadConversation';
 import { RequireAuth } from './components/RequireAuth';
 import { motion, AnimatePresence } from 'motion/react';
+import { FeeReceiptMagicEntry } from './pages/payments/FeeReceiptMagicEntry';
+import { FeeReceiptPage } from './pages/payments/FeeReceiptPage';
 
 export default function App() {
   return (
     <Router>
       <AnimatePresence mode="wait">
         <Routes>
+          <Route path="/e/:token" element={<FeeReceiptMagicEntry />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/"
@@ -103,6 +106,16 @@ export default function App() {
               <RequireAuth>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   <MessagesInbox />
+                </motion.div>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/payments/receipt/:id"
+            element={
+              <RequireAuth>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <FeeReceiptPage />
                 </motion.div>
               </RequireAuth>
             }

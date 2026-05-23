@@ -46,7 +46,12 @@
     },
     "finance": {
       "totalDue": "Total fees due",
-      "duePerChild": "Due per child"
+      "duePerChild": "Due per child",
+      "liveBalance": "Live balance (billing)",
+      "liveShort": "Live",
+      "liveUnavailable": "School year not loaded yet.",
+      "liveError": "Could not refresh live billing. Try again or open Reports.",
+      "livePartial": "Showing billing for {{n}} of {{total}} children."
     },
     "risk": {
       "failChance": "Fail chance"
@@ -143,6 +148,32 @@
       "monthly": "monthly",
       "months": "{{n}} months",
       "selected": "Selected"
+    },
+    "mode": {
+      "weekly": "Weekly report",
+      "live": "Live snapshot"
+    },
+    "weekly": {
+      "pickPeriod": "Report period"
+    },
+    "live": {
+      "academicYear": "School year",
+      "sectionFinance": "Fees (live)",
+      "sectionAcademic": "Academic progress (bulletin)",
+      "financeError": "Could not load fee snapshot.",
+      "academicError": "Could not load bulletin progress.",
+      "legacyDisclaimer": "Per-fee lines may be approximate when using a legacy combined payment plan.",
+      "totalRemaining": "Remaining this year",
+      "remaining": "Remaining",
+      "colFee": "Fee",
+      "yearAveragePct": "Year average",
+      "classContext": "Class / year",
+      "pct": "%",
+      "noSubjectPct": "No subject percentages available for this year yet.",
+      "personnelDiscountNote": "Personnel-linked fee discounts apply to this child’s expected amounts.",
+      "colExpectedAnnual": "Annual expected",
+      "colPaidYtd": "Paid (year)",
+      "colRemaining": "Remaining"
     }
   },
   "childReport": {

@@ -6,9 +6,10 @@ import {
   parsePupilWeeklyReport,
   supportSubjectsRows,
 } from '../lib/analysis/pupilWeeklyReportModel';
+import { formatParentFinanceDebt } from '../lib/financeDisplay';
 
 function formatMoney(amount: number, currency = 'USD') {
-  return new Intl.NumberFormat(undefined, { style: 'currency', currency }).format(amount);
+  return new Intl.NumberFormat(undefined, { style: 'currency', currency: 'USD' }).format(amount);
 }
 
 function riskChipClass(level: string | null): string {
@@ -109,8 +110,18 @@ export const ParentPupilWeeklyReport: React.FC<{
               <p className="text-white/80 text-sm font-medium mb-1">
                 {t('report.kpiOutstanding', { defaultValue: 'Outstanding fees' })}
               </p>
-              <div className="text-2xl font-bold tracking-tighter">
-                {facts.finance.outstandingEstimate != null ? formatMoney(facts.finance.outstandingEstimate) : '—'}
+              <div className="text-2xl font-bold tracking-tighter break-words">
+                {facts.finance.outstandingByCurrency
+                  ? formatParentFinanceDebt({
+                      lines: [],
+                      totalDebt: facts.finance.outstandingEstimate ?? 0,
+                      totalDebtByCurrency: facts.finance.outstandingByCurrency,
+                      legacyApprox: false,
+                      monthsInYear: 10,
+                    })
+                  : facts.finance.outstandingEstimate != null
+                    ? formatMoney(facts.finance.outstandingEstimate)
+                    : '—'}
               </div>
             </div>
           </div>

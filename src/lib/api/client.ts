@@ -162,3 +162,71 @@ export async function meRequest(): Promise<{
 }> {
   return apiJson('/auth/me');
 }
+
+export type ParentFeeReceiptBreakdownDto = {
+  primaryId: string;
+  studentId: string;
+  reference: string | null;
+  date: string;
+  method: string;
+  status: string;
+  totalAmount: number;
+  totalRemainingDebt: number | null;
+  lines: Array<{
+    id: string;
+    feeId: string;
+    amount: number;
+    feeName: string;
+    feeCategory: string;
+  }>;
+  byCategory: Record<string, number>;
+};
+
+export type FeeReceiptLoginResponse = {
+  accessToken: string;
+  refreshToken: string;
+  expiresIn: string;
+  primaryFeeTransactionId: string;
+  permissions: string[];
+  campuses: Array<{ id: string; name: string; code: string }>;
+  school: {
+    id: string;
+    name: string;
+    legalName: string;
+    logo: string | null;
+    email: string;
+    phone: string;
+    city: string;
+    country: string;
+  };
+};
+
+export async function exchangeFeeReceiptLogin(
+  token: string,
+): Promise<FeeReceiptLoginResponse> {
+  const res = await fetch(buildUrl('/auth/parent/fee-receipt-login'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token }),
+  });
+  if (!res.ok) {
+    let message = 'Échec de la connexion';
+    try {
+      const j = (await res.json()) as { message?: unknown };
+      if (Array.isArray(j.message)) message = j.message.join(', ');
+      else if (j.message) message = String(j.message);
+    } catch {
+      /* ignore */
+    }
+    throw new Error(message);
+  }
+  return res.json() as Promise<FeeReceiptLoginResponse>;
+}
+
+export async function getParentFeeReceiptBreakdown(
+  transactionId: string,
+): Promise<ParentFeeReceiptBreakdownDto> {
+  return apiJson(
+    `/parent/fee-transactions/${encodeURIComponent(transactionId)}/breakdown`,
+  );
+}
