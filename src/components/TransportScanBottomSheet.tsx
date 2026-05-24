@@ -42,7 +42,7 @@ export function TransportScanBottomSheet({
   const pickup = primary.scanKind === 'bus_pickup';
   const hasMultiple = events.length > 1;
   return (
-    <div className="fixed inset-0 z-[200] flex items-end justify-center bg-black/20">
+    <div className="fixed inset-0 z-[999999999] flex items-end justify-center bg-black/20">
       <button
         type="button"
         className="absolute inset-0 cursor-default"
