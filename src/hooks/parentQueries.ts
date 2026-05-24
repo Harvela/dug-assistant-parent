@@ -16,6 +16,7 @@ export type ParentChildDto = {
   attendanceRate: string | null;
   className?: string;
   gradeName?: string;
+  transportBusId?: string | null;
 };
 
 export type PerformanceReportDto = {
@@ -98,28 +99,32 @@ export function useChildAnalysisReports(
   studentId: string | undefined,
   page = 1,
   limit = 20,
+  options?: { enabled?: boolean },
 ) {
+  const enabledOuter = options?.enabled !== false;
   return useQuery({
     queryKey: [...queryKeys.analysisReports(studentId ?? ''), page, limit],
     queryFn: () =>
       apiJson<PaginatedResult<AnalysisReportDto>>(
         `/parent/students/${studentId}/analysis-reports?page=${page}&limit=${limit}`,
       ),
-    enabled: Boolean(studentId),
+    enabled: Boolean(studentId) && enabledOuter,
   });
 }
 
 export function useChildAnalysisReport(
   studentId: string | undefined,
   reportId: string | undefined,
+  options?: { enabled?: boolean },
 ) {
+  const enabledOuter = options?.enabled !== false;
   return useQuery({
     queryKey: queryKeys.analysisReport(studentId ?? '', reportId ?? ''),
     queryFn: () =>
       apiJson<AnalysisReportDto>(
         `/parent/students/${studentId}/analysis-reports/${reportId}`,
       ),
-    enabled: Boolean(studentId && reportId),
+    enabled: Boolean(studentId && reportId) && enabledOuter,
   });
 }
 
@@ -242,6 +247,91 @@ export function useGeneratePerformanceReport() {
       });
       void qc.invalidateQueries({ queryKey: queryKeys.analysisOverview });
     },
+  });
+}
+
+export type ParentTransportSnapshotDto = {
+  bus: { id: string; label: string; plateNumber: string | null } | null;
+  stops: Array<{
+    sequence: number;
+    name: string;
+    latitude: number;
+    longitude: number;
+    expectedTime: string | null;
+  }>;
+  latestPosition: {
+    latitude: number;
+    longitude: number;
+    recordedAt: string;
+  } | null;
+  busScansToday: Array<{
+    id?: string;
+    scannedAt: string;
+    scanKind: string;
+    statusRecorded: string;
+    latitude: number | null;
+    longitude: number | null;
+  }>;
+  busScansLast7Days: Array<{
+    id: string;
+    scannedAt: string;
+    scanKind: string;
+    statusRecorded: string;
+    latitude: number | null;
+    longitude: number | null;
+    day: string;
+    isToday: boolean;
+  }>;
+};
+
+export type ParentAttendanceReportDto = {
+  from: string;
+  to: string;
+  days: ParentAttendanceDailyDto[];
+};
+
+/** Live-ish bus itinerary + telemetry for parent's child (staff-assigned bus). */
+export function useChildTransportSnapshot(
+  studentId: string | undefined,
+  options?: { enabled?: boolean },
+) {
+  const enabled = options?.enabled !== false;
+  return useQuery({
+    queryKey: queryKeys.transportSnapshot(studentId ?? ''),
+    queryFn: () =>
+      apiJson<ParentTransportSnapshotDto>(
+        `/parent/students/${studentId}/transport`,
+      ),
+    enabled: Boolean(studentId) && enabled,
+    refetchInterval: 30_000,
+    refetchOnWindowFocus: true,
+  });
+}
+
+/** Multi-day scan timeline (`from`/`to` optional — server defaults to last 7 days). */
+export function useChildAttendanceReport(
+  studentId: string | undefined,
+  from: string | undefined,
+  to: string | undefined,
+  options?: { enabled?: boolean },
+) {
+  const enabled = options?.enabled !== false;
+  const qs = new URLSearchParams();
+  if (from) qs.set('from', from);
+  if (to) qs.set('to', to);
+  const suf = qs.toString() ? `?${qs.toString()}` : '';
+  return useQuery({
+    queryKey: queryKeys.attendanceReport(
+      studentId ?? '',
+      from ?? '',
+      to ?? '',
+    ),
+    queryFn: () =>
+      apiJson<ParentAttendanceReportDto>(
+        `/parent/students/${studentId}/attendance-report${suf}`,
+      ),
+    enabled: Boolean(studentId) && enabled,
+    staleTime: 60_000,
   });
 }
 

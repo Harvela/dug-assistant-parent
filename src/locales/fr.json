@@ -5,6 +5,7 @@
   "nav": {
     "home": "Accueil",
     "children": "Enfants",
+    "transport": "Transport",
     "reports": "Rapports",
     "inbox": "Boîte",
     "profile": "Profil"
@@ -180,7 +181,41 @@
     "title": "Détails des Rapports",
     "subtitle": "Analyse complète des performances et de l'engagement hebdomadaire.",
     "pickWeek": "Choisir une semaine",
-    "noReports": "Aucun rapport pour le moment."
+    "noReports": "Aucun rapport pour le moment.",
+    "transport": {
+      "label": "Transport",
+      "title": "Carte du bus scolaire",
+      "emptyNoBus": "Aucun bus n’est assigné et aucun scan transport n’a été enregistré ces 7 derniers jours.",
+      "lastPosition": "Dernière position du bus",
+      "noPositionYet": "Aucune position GPS enregistrée pour le moment."
+    }
+  },
+  "transport": {
+    "page": {
+      "kicker": "Transport scolaire",
+      "subtitle": "Position du bus et scans de montée/descente des 7 derniers jours pour vos enfants.",
+      "noChildren": "Aucun enfant n’est lié à votre compte pour le moment.",
+      "pickChild": "Enfant"
+    },
+    "scanKind": {
+      "pickup": "Montée dans le bus",
+      "drop": "Descente du bus"
+    },
+    "legend": {
+      "todayPickup": "Montée aujourd’hui",
+      "todayDrop": "Descente aujourd’hui",
+      "previousPickup": "Montée précédente",
+      "previousDrop": "Descente précédente"
+    },
+    "bottomSheet": {
+      "today": "Aujourd’hui",
+      "previous": "Scan précédent",
+      "groupTitle": "{{count}} scans proches",
+      "time": "Heure",
+      "status": "Statut",
+      "bus": "Bus",
+      "close": "Fermer"
+    }
   },
   "children": {
     "title": "Enfants",

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Users, BarChart3, Bell, User } from 'lucide-react';
+import { Home, Users, BarChart3, Bell, User, Bus } from 'lucide-react';
 import { useParentCommuniquesUnreadCountQuery } from '../hooks/parentCommuniquesQueries';
 import { cn } from '../lib/utils';
 import { useTranslation } from 'react-i18next';
@@ -52,6 +52,7 @@ export const BottomNav: React.FC = () => {
   const navItems = [
     { icon: Home, label: t('nav.home', { defaultValue: 'Home' }), path: '/' },
     { icon: Users, label: t('nav.children', { defaultValue: 'Children' }), path: '/children' },
+    { icon: Bus, label: t('nav.transport', { defaultValue: 'Transport' }), path: '/transport' },
     { icon: BarChart3, label: t('nav.reports', { defaultValue: 'Reports' }), path: '/reports' },
     { icon: Bell, label: t('nav.inbox', { defaultValue: 'Inbox' }), path: '/notifications' },
     // { icon: User, label: 'Profile', path: '/profile' },

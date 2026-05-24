@@ -5,6 +5,7 @@
   "nav": {
     "home": "Home",
     "children": "Children",
+    "transport": "Transport",
     "reports": "Reports",
     "inbox": "Inbox",
     "profile": "Profile"
@@ -180,7 +181,41 @@
     "title": "Report details",
     "subtitle": "Full analysis of weekly performance and engagement.",
     "pickWeek": "Choose a week",
-    "noReports": "No reports yet."
+    "noReports": "No reports yet.",
+    "transport": {
+      "label": "Transport",
+      "title": "School bus map",
+      "emptyNoBus": "No bus is assigned and no transport scans were recorded in the last 7 days.",
+      "lastPosition": "Last bus position",
+      "noPositionYet": "No GPS position recorded yet."
+    }
+  },
+  "transport": {
+    "page": {
+      "kicker": "School transport",
+      "subtitle": "Live bus position and the last 7 days of pickup/drop-off scans for your children.",
+      "noChildren": "No children linked to your account yet.",
+      "pickChild": "Child"
+    },
+    "scanKind": {
+      "pickup": "Bus pickup",
+      "drop": "Bus drop-off"
+    },
+    "legend": {
+      "todayPickup": "Today pickup",
+      "todayDrop": "Today drop-off",
+      "previousPickup": "Previous pickup",
+      "previousDrop": "Previous drop-off"
+    },
+    "bottomSheet": {
+      "today": "Today",
+      "previous": "Previous scan",
+      "groupTitle": "{{count}} nearby scans",
+      "time": "Time",
+      "status": "Status",
+      "bus": "Bus",
+      "close": "Close"
+    }
   },
   "children": {
     "title": "Children",

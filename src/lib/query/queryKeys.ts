@@ -25,6 +25,10 @@ export const queryKeys = {
     ['parent', 'academic-progress', studentId, academicYearId] as const,
   attendanceDaily: (studentId: string, day: string) =>
     ['parent', 'attendance-daily', studentId, day] as const,
+  transportSnapshot: (studentId: string) =>
+    ['parent', 'student-transport', studentId] as const,
+  attendanceReport: (studentId: string, from: string, to: string) =>
+    ['parent', 'attendance-report-range', studentId, from, to] as const,
   parentCommuniques: {
     threads: (p: ParentCommuniquesListParams) => ['parent', 'communiques', 'threads', p] as const,
     messages: (threadId: string) => ['parent', 'communiques', 'messages', threadId] as const,

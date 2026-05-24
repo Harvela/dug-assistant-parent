@@ -5,6 +5,7 @@ import { AcademicDetail } from './AcademicDetail';
 import { BehaviorProfile } from './BehaviorProfile';
 import { ReportsOverview } from './ReportsOverview';
 import { ChildReport } from './ChildReport';
+import { TransportPage } from './TransportPage';
 import { Login } from './Login';
 import { MessagesInbox } from './pages/messages/MessagesInbox';
 import { ThreadConversation } from './pages/messages/ThreadConversation';
@@ -56,6 +57,26 @@ export default function App() {
               <RequireAuth>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   <BehaviorProfile />
+                </motion.div>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/transport"
+            element={
+              <RequireAuth>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <TransportPage />
+                </motion.div>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/transport/:studentId"
+            element={
+              <RequireAuth>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <TransportPage />
                 </motion.div>
               </RequireAuth>
             }
