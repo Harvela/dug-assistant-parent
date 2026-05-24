@@ -53,7 +53,7 @@ export const ParentPupilWeeklyReport: React.FC<{
     financeTone === 'high'
       ? 'bg-secondary text-white'
       : financeTone === 'medium'
-        ? '#835058 text-white'
+        ? 'bg-[#835058] text-white'
         : 'bg-primary text-white';
 
   return (

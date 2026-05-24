@@ -137,7 +137,7 @@ export const Dashboard: React.FC = () => {
   const hasAmountOwed =
     liveFinance.totalLiveUsd > 0.005;
   if (hasAmountOwed) {
-    financeCardBg = '#835058 text-white';
+    financeCardBg = 'bg-[#835058] text-white';
   }
 
   return (
