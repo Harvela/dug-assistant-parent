@@ -13,6 +13,7 @@ import { RequireAuth } from './components/RequireAuth';
 import { motion, AnimatePresence } from 'motion/react';
 import { FeeReceiptMagicEntry } from './pages/payments/FeeReceiptMagicEntry';
 import { FeeReceiptPage } from './pages/payments/FeeReceiptPage';
+import { EnableNotificationsDialog } from './components/EnableNotificationsDialog';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
               <RequireAuth>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   <Dashboard />
+                  <EnableNotificationsDialog />
                 </motion.div>
               </RequireAuth>
             }
@@ -37,6 +39,7 @@ export default function App() {
               <RequireAuth>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   <ChildrenList />
+                  <EnableNotificationsDialog />
                 </motion.div>
               </RequireAuth>
             }
@@ -127,6 +130,7 @@ export default function App() {
               <RequireAuth>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                   <MessagesInbox />
+                  <EnableNotificationsDialog />
                 </motion.div>
               </RequireAuth>
             }

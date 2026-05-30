@@ -53,12 +53,12 @@ export const Login: React.FC = () => {
           ) : null}
           <div className="space-y-1">
             <label className="font-mono text-[10px] uppercase text-on-surface-variant" htmlFor="email">
-              {t('auth.email', { defaultValue: 'Email' })}
+              {t('auth.emailOrPhone', { defaultValue: 'Email or phone' })}
             </label>
             <input
               id="email"
-              type="email"
-              autoComplete="email"
+              type="text"
+              autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full rounded-lg border border-outline-variant/30 bg-background px-3 py-2 text-on-surface"
