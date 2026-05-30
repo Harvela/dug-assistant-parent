@@ -155,6 +155,26 @@ export async function loginRequest(
   return res.json() as Promise<{ accessToken: string; refreshToken: string }>;
 }
 
+export async function fetchVapidPublicKey(): Promise<string> {
+  const res = await apiJson<{ publicKey: string }>('/push/vapid-public-key');
+  return res.publicKey;
+}
+
+export async function subscribePushNotifications(
+  subscription: PushSubscription,
+): Promise<void> {
+  const json = subscription.toJSON();
+  await apiVoid('/push/subscribe', {
+    method: 'POST',
+    body: JSON.stringify({
+      endpoint: json.endpoint,
+      p256dh: json.keys?.p256dh,
+      auth: json.keys?.auth,
+      app: 'parent',
+    }),
+  });
+}
+
 export async function meRequest(): Promise<{
   id: string;
   email: string;
